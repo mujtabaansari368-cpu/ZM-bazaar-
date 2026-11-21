@@ -1,0 +1,212 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "ZM Bazaar user profile with role (CUSTOMER, SELLER, ADMIN) and contact info.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "city": { "type": "string" },
+        "role": { "type": "string", "enum": ["CUSTOMER", "SELLER", "ADMIN"] },
+        "createdAt": { "type": "string", "format": "date-time", "description": "FieldValue.serverTimestamp()" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "FieldValue.serverTimestamp()" }
+      },
+      "required": ["userId", "fullName", "email", "role", "createdAt", "updatedAt"]
+    },
+    "SellerProfile": {
+      "title": "SellerProfile",
+      "description": "Multi-vendor seller store details and private payout account.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "shopName": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "cnic": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "paymentAccountNumber": { "type": "string" },
+        "paymentAccountTitle": { "type": "string" },
+        "shopAddress": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "shopName", "ownerName", "phone", "cnic", "paymentMethod", "paymentAccountNumber", "paymentAccountTitle", "shopAddress", "status", "createdAt", "updatedAt"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category in ZM Bazaar.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "iconKey": { "type": "string" },
+        "accentHex": { "type": "integer" },
+        "sortOrder": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "iconKey", "accentHex", "sortOrder", "createdAt", "updatedAt"]
+    },
+    "Banner": {
+      "title": "Banner",
+      "description": "Home slider banner managed by Admin.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "badgeText": { "type": "string" },
+        "imageUri": { "type": "string" },
+        "targetCategory": { "type": "string" },
+        "active": { "type": "boolean" },
+        "sortOrder": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "subtitle", "badgeText", "imageUri", "active", "sortOrder", "createdAt", "updatedAt"]
+    },
+    "PaymentAccount": {
+      "title": "PaymentAccount",
+      "description": "Admin storefront payment accounts (Easypaisa, JazzCash, Meezan Bank).",
+      "type": "object",
+      "properties": {
+        "providerName": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "accountTitle": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["providerName", "accountNumber", "accountTitle", "active", "createdAt", "updatedAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Marketplace product listing.",
+      "type": "object",
+      "properties": {
+        "sellerUid": { "type": "string" },
+        "shopName": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "oldPrice": { "type": "number" },
+        "stock": { "type": "integer" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "integer" },
+        "imageUrls": { "type": "string" },
+        "flashSale": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "allowsCustomName": { "type": "boolean" },
+        "approvalStatus": { "type": "string", "enum": ["APPROVED", "PENDING", "REJECTED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["sellerUid", "shopName", "name", "description", "category", "price", "oldPrice", "stock", "rating", "reviewCount", "imageUrls", "flashSale", "featured", "allowsCustomName", "approvalStatus", "createdAt", "updatedAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with line items, payment screenshot, status, and 10% commission.",
+      "type": "object",
+      "properties": {
+        "orderCode": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "note": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "paymentAccountInfo": { "type": "string" },
+        "paymentScreenshotUri": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "deliveryCharges": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "commissionAmount": { "type": "number" },
+        "sellerEarningAmount": { "type": "number" },
+        "payoutStatus": { "type": "string", "enum": ["NONE", "PENDING_PAYOUT", "PAID"] },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Shipped", "Delivered", "Cancelled"] },
+        "sellerUids": { "type": "array" },
+        "items": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderCode", "customerId", "customerName", "phone", "address", "city", "paymentMethod", "subtotal", "deliveryCharges", "grandTotal", "commissionAmount", "sellerEarningAmount", "payoutStatus", "status", "sellerUids", "items", "createdAt", "updatedAt"]
+    },
+    "CartItem": {
+      "title": "CartItem",
+      "description": "User-scoped shopping cart item.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "productId": { "type": "string" },
+        "sellerUid": { "type": "string" },
+        "productName": { "type": "string" },
+        "shopName": { "type": "string" },
+        "unitPrice": { "type": "number" },
+        "oldPrice": { "type": "number" },
+        "imageUri": { "type": "string" },
+        "quantity": { "type": "integer" },
+        "customName": { "type": "string" },
+        "customPhotoUri": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "productId", "sellerUid", "productName", "shopName", "unitPrice", "imageUri", "quantity", "createdAt", "updatedAt"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "User-scoped notification item.",
+      "type": "object",
+      "properties": {
+        "senderUid": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderUid", "title", "message", "type", "read", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User accounts and roles."
+    },
+    "/users/{userId}/cart/{cartId}": {
+      "schema": { "$ref": "#/entities/CartItem" },
+      "description": "Authenticated user shopping cart."
+    },
+    "/users/{userId}/notifications/{notifId}": {
+      "schema": { "$ref": "#/entities/AppNotification" },
+      "description": "User notifications."
+    },
+    "/sellers/{sellerId}": {
+      "schema": { "$ref": "#/entities/SellerProfile" },
+      "description": "Verified and pending multi-vendor sellers (sellerId == userId)."
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Storefront categories."
+    },
+    "/banners/{bannerId}": {
+      "schema": { "$ref": "#/entities/Banner" },
+      "description": "Home slider banners."
+    },
+    "/payment_accounts/{accountId}": {
+      "schema": { "$ref": "#/entities/PaymentAccount" },
+      "description": "Admin payment accounts shown at checkout."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Multi-vendor product catalog."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer orders with sellerUids for multi-vendor access."
+    }
+  }
+}

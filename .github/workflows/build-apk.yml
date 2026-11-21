@@ -1,0 +1,56 @@
+name: Build and Release ZM Bazaar APK
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Prepare debug keystore
+        run: |
+          if [ ! -f debug.keystore ] && [ -f debug.keystore.base64 ]; then
+            base64 -d debug.keystore.base64 > debug.keystore
+          fi
+
+      - name: Setup Gradle 9.3.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Build Debug APK
+        run: gradle :app:assembleDebug
+
+      - name: Rename APK for Release
+        run: cp app/build/outputs/apk/debug/app-debug.apk ZM-Bazaar.apk
+
+      - name: Upload ZM Bazaar APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zm-bazaar-debug-apk
+          path: ZM-Bazaar.apk
+
+      - name: Publish Public GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0-latest
+          name: ZM Bazaar Android App (Latest)
+          body: "Download ZM-Bazaar.apk below and install on any Android 7.0+ device."
+          files: ZM-Bazaar.apk
+          make_latest: true

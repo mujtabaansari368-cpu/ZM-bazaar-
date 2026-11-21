@@ -1,0 +1,6 @@
+{
+  "name": "ZM Bazaar",
+  "description": "ZM Bazaar - Pakistan Ka No.1 Online Bazaar. Multi-vendor e-commerce marketplace with buyer storefront, cart, checkout, seller dashboard, 10% commission tracking, and admin panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

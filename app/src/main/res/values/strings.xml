@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ZM Bazaar</string>
+    <string name="tagline">Pakistan Ka No.1 Online Bazaar</string>
+    <string name="owner_address">ZM Bazaar, Barnala, Azad Kashmir, Pakistan</string>
+    <string name="whatsapp_url">https://wa.me/923558279470</string>
+    <string name="whatsapp_number">03558279470</string>
+    <string name="support_email">ansariproducts05@gmail.com</string>
+    <string name="copyright_notice">Copyright © 2026 ZM Bazaar</string>
+    <string name="cd_whatsapp_fab">Contact ZM Bazaar on WhatsApp</string>
+    <string name="cd_cart_button">Open Shopping Cart</string>
+    <string name="cd_search_bar">Search products or shops</string>
+    <string name="cd_back_button">Navigate back</string>
+    <string name="cd_notifications">View notifications</string>
+</resources>
