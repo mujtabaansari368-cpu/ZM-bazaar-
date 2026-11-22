@@ -11,4 +11,6 @@
     <string name="cd_search_bar">Search products or shops</string>
     <string name="cd_back_button">Navigate back</string>
     <string name="cd_notifications">View notifications</string>
-</resources>
+<string name="default_web_client_id">PASTE_YOUR_CLIENT_ID_HERE</string>
+    </resources>
+                                                        
